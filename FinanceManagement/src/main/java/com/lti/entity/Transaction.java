@@ -18,7 +18,7 @@ public class Transaction {
 	@Id
 	@SequenceGenerator(name = "seq_transaction",allocationSize = 1,initialValue = 600001)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_transaction")
-	private int transactionId;
+	private long transactionId;
 	private int amountPaid;
 	private LocalDate transactionDate;
 	
@@ -34,7 +34,7 @@ public class Transaction {
 	@JoinColumn(name = "cardId")
 	Card card;
 
-	public int getTransactionId() {
+	public long getTransactionId() {
 		return transactionId;
 	}
 

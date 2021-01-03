@@ -23,7 +23,7 @@ public class ProductPurchased {
 	@Id
 	@SequenceGenerator(name = "seq_product_purchased",allocationSize = 1,initialValue = 500001)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_product_purchased")
-	private int productPurchasedId;
+	private long productPurchasedId;
 	private LocalDate productPurchasedDate;
 	private int emiScheme;
 	
@@ -38,7 +38,7 @@ public class ProductPurchased {
 	@OneToMany(mappedBy = "productPurchased",cascade = CascadeType.ALL)
 	List<Transaction> transactions;
 
-	public int getProductPurchasedId() {
+	public long getProductPurchasedId() {
 		return productPurchasedId;
 	}
 
