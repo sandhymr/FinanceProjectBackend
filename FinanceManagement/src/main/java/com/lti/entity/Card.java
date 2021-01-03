@@ -1,12 +1,15 @@
 package com.lti.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,7 +21,7 @@ public class Card {
 	@Id
 	@SequenceGenerator(name = "seq_card",initialValue = 300001,allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "seq_user")
-	private long cardNumber;
+	private long cardId;
 	private LocalDate validity;
 	private boolean status;
 	private double totalCredit;
@@ -29,12 +32,15 @@ public class Card {
 	@JoinColumn(name = "userId")
 	User user;
 
-	public long getCardNumber() {
-		return cardNumber;
+	@OneToMany(mappedBy = "card",cascade = CascadeType.ALL)
+	List<Transaction> transactions;
+
+	public long getCardId() {
+		return cardId;
 	}
 
-	public void setCardNumber(long cardNumber) {
-		this.cardNumber = cardNumber;
+	public void setCardId(long cardId) {
+		this.cardId = cardId;
 	}
 
 	public LocalDate getValidity() {
@@ -84,8 +90,13 @@ public class Card {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
 
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+	
 }

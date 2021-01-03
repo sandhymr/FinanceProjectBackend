@@ -42,6 +42,9 @@ public class User {
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	List<ProductPurchased> productsPurchased;
 	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	List<Transaction> transactions;
+
 	public long getUserId() {
 		return userId;
 	}
@@ -168,6 +171,22 @@ public class User {
 
 	public void setCard(Card card) {
 		this.card = card;
+	}
+
+	public List<ProductPurchased> getProductsPurchased() {
+		return productsPurchased;
+	}
+
+	public void setProductsPurchased(List<ProductPurchased> productsPurchased) {
+		this.productsPurchased = productsPurchased;
+	}
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 	
 	

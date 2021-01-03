@@ -32,7 +32,6 @@ public class Product
 	
 	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
 	List<ProductPurchased> productsPurchased;
-	
 
 	public long getProductId() {
 		return productId;
@@ -97,9 +96,6 @@ public class Product
 	public void setProductsPurchased(List<ProductPurchased> productsPurchased) {
 		this.productsPurchased = productsPurchased;
 	}
-
-	
-	
 	
 	
 }

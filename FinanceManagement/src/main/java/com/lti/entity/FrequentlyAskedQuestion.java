@@ -57,6 +57,6 @@ public class FrequentlyAskedQuestion {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
+
 	
 }

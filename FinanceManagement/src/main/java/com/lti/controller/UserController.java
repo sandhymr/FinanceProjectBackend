@@ -1,5 +1,5 @@
 package com.lti.controller;
 
-public class Sample {
+public class UserController {
 
 }

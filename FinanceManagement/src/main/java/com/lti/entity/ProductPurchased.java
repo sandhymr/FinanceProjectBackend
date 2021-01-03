@@ -3,6 +3,7 @@ package com.lti.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,6 +34,9 @@ public class ProductPurchased {
 	@ManyToOne
 	@JoinColumn(name = "productId")
     Product product;
+	
+	@OneToMany(mappedBy = "productPurchased",cascade = CascadeType.ALL)
+	List<Transaction> transactions;
 
 	public int getProductPurchasedId() {
 		return productPurchasedId;
@@ -72,8 +77,13 @@ public class ProductPurchased {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
-	
+
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
+	}
 		
 }
