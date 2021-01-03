@@ -14,49 +14,49 @@ import com.lti.entity.User;
 public interface UserAndAdminService {
 
 	// user
-		long register(User user);
+		long register(User user);   //a
 
-		User payJoiningFee(int userId);
+		User payJoiningFee(int userId); //b
 
-		boolean login(String userName, String password);
+		boolean login(String userName, String password); //d
 
-		List<Product> viewAllProducts();
+		List<Product> viewAllProducts(); //s
 
-		ProductPurchased buyProduct(int userId, int productId, String emiScheme);
+		ProductPurchased buyProduct(int userId, int productId, String emiScheme); //a
 
-		Transaction payEmi(int productPurchasedId, int userId, int cardId);
+		Transaction payEmi(int productPurchasedId, int userId, int cardId); //b
 
-		List<Transaction> viewTransactionsOfAnUser(int userId);
+		List<Transaction> viewTransactionsOfAnUser(int userId); //d
 
-		List<Transaction> viewTransactionsOfAnUserByDate(int userId, LocalDate date);
+		List<Transaction> viewTransactionsOfAnUserByDate(int userId, LocalDate date); //s
 
-	    String forgotPassword(String email);
+	    String forgotPassword(String email); //a
 	    
-		User changePassword(int userId);
+		User changePassword(int userId); //b
 
-		List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(int productId);
+		List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(int productId); //d
 
 		// admin
-		String adminRegister(Admin admin);
+		String adminRegister(Admin admin); //s
 
-		boolean adminLogin(String userName, String password);
+		boolean adminLogin(String userName, String password); //a
 
-		List<User> viewAllUsers();
+		List<User> viewAllUsers(); //b
 
-		List<User> viewUsersByPaid(int userId, double registrationFee);
+		List<User> viewUsersByPaid(int userId, double registrationFee); //d
 
-		List<User> viewUsersByNotPaid(int userId, double registrationFee);
+		List<User> viewUsersByNotPaid(int userId, double registrationFee); //s
 
-		Card verifyAndGenerateCardForAnUser(int userId, Card card);
+		Card verifyAndGenerateCardForAnUser(int userId, Card card); //a
 
-		long addAProduct(Product product);
+		long addAProduct(Product product); //b
 
 //	    6.viewAllProducts() - same as user
-		List<Product> viewAllProductsPurchasedByAnUser(int userId);
+		List<Product> viewAllProductsPurchasedByAnUser(int userId); //d
 
 //	    8.viewTransactionsOfAnUser(int userId) - same as user
-		long AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq);
+		long AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq); //s
 
-		List<Product> viewProductsByFilter(String productType);
+		List<Product> viewProductsByFilter(String productType); //a
 
 }
