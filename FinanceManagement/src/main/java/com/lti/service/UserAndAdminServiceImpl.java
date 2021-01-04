@@ -1,7 +1,11 @@
 package com.lti.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.lti.entity.Admin;
 import com.lti.entity.Card;
@@ -10,8 +14,13 @@ import com.lti.entity.Product;
 import com.lti.entity.ProductPurchased;
 import com.lti.entity.Transaction;
 import com.lti.entity.User;
+import com.lti.repository.UserAndAdminRepository;
 
+@Service
 public class UserAndAdminServiceImpl implements UserAndAdminService {
+	
+	@Autowired
+	UserAndAdminRepository userAndAdminRepository;
 
 	@Override
 	public long register(User user) {
@@ -33,8 +42,12 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 
 	@Override
 	public List<Product> viewAllProducts() {
-		// TODO Auto-generated method stub
-		return null;
+        List<Product> products = userAndAdminRepository.viewAllProducts();
+        if(products.isEmpty()) {
+        	return null;
+        }else {
+           return products;	
+        }
 	}
 
 	@Override
@@ -56,9 +69,15 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public List<Transaction> viewTransactionsOfAnUserByDate(int userId, LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Transaction> viewTransactionsOfAnUserByDate(int userId, String date) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
+        LocalDate localDate = LocalDate.parse(date, formatter);
+	    List<Transaction> transactions = userAndAdminRepository.viewTransactionsOfAnUserByDate(userId, localDate);
+	    if(transactions != null) {
+	    	return transactions;
+	    }else {
+	    	return null;
+	    }
 	}
 
 	@Override
@@ -81,8 +100,12 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 
 	@Override
 	public String adminRegister(Admin admin) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = userAndAdminRepository.adminRegister(admin);
+		if(result!=null) {
+			return "Registered successfully";
+		}else {
+			return "Registration failed.";
+		}
 	}
 
 	@Override
@@ -104,9 +127,13 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public List<User> viewUsersByNotPaid(int userId, double registrationFee) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> viewUsersByNotPaid() {
+		List<User> users = userAndAdminRepository.viewUsersByNotPaid();
+		if(users.isEmpty()) {
+			return null;
+		}else {
+		    return users;	
+		}
 	}
 
 	@Override
@@ -128,9 +155,14 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public long AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq) {
-		// TODO Auto-generated method stub
-		return 0;
+	public String AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq) {
+		long result = userAndAdminRepository.AddFrequentlyAskedQuestions(productId, faq);
+		if(result < 0) {
+			return "Failed to add the details";
+		}else {
+			return "Added successfully";
+		}
+	    
 	}
 
 	@Override

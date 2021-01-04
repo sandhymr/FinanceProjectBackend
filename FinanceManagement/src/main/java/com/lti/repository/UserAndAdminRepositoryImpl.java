@@ -3,6 +3,13 @@ package com.lti.repository;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+
 import com.lti.entity.Admin;
 import com.lti.entity.Card;
 import com.lti.entity.FrequentlyAskedQuestion;
@@ -11,7 +18,11 @@ import com.lti.entity.ProductPurchased;
 import com.lti.entity.Transaction;
 import com.lti.entity.User;
 
+@Repository
 public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
+	
+	@PersistenceContext
+	EntityManager em;
 
 	@Override
 	public long register(User user) {
@@ -33,8 +44,9 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 
 	@Override
 	public List<Product> viewAllProducts() {
-		// TODO Auto-generated method stub
-		return null;
+		String jpql="from Product p";
+		TypedQuery<Product> query = em.createQuery(jpql, Product.class);
+		return query.getResultList();
 	}
 
 	@Override
@@ -57,8 +69,11 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 
 	@Override
 	public List<Transaction> viewTransactionsOfAnUserByDate(int userId, LocalDate date) {
-		// TODO Auto-generated method stub
-		return null;
+		String jpql="from Transaction t where t.userId=:userId and t.transactionDate=:date";
+		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
+		query.setParameter("userId", userId);
+		query.setParameter("date", date);
+		return query.getResultList();
 	}
 
 	@Override
@@ -74,9 +89,10 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
+	@Transactional
 	public String adminRegister(Admin admin) {
-		// TODO Auto-generated method stub
-		return null;
+		Admin newAdmin = em.merge(admin);
+		return newAdmin.getUserName();
 	}
 
 	@Override
@@ -98,9 +114,10 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
-	public List<User> viewUsersByNotPaid(int userId, double registrationFee) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<User> viewUsersByNotPaid() {
+		String jpql="from User u where u.registrationFee<0";
+		TypedQuery<User> query = em.createQuery(jpql, User.class);
+		return query.getResultList();
 	}
 
 	@Override
@@ -123,8 +140,9 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 
 	@Override
 	public long AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq) {
-		// TODO Auto-generated method stub
-		return 0;
+		faq.getProduct().setProductId(productId);
+		FrequentlyAskedQuestion newFaq = em.merge(faq);
+		return newFaq.getFaqId();
 	}
 
 	@Override

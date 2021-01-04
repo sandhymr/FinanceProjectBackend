@@ -28,7 +28,7 @@ public interface UserAndAdminService {
 
 		List<Transaction> viewTransactionsOfAnUser(int userId); //d
 
-		List<Transaction> viewTransactionsOfAnUserByDate(int userId, LocalDate date); //s
+		List<Transaction> viewTransactionsOfAnUserByDate(int userId, String date); //s
 
 	    String forgotPassword(String email); //a
 	    
@@ -45,7 +45,7 @@ public interface UserAndAdminService {
 
 		List<User> viewUsersByPaid(int userId, double registrationFee); //d
 
-		List<User> viewUsersByNotPaid(int userId, double registrationFee); //s
+		List<User> viewUsersByNotPaid(); //s
 
 		Card verifyAndGenerateCardForAnUser(int userId, Card card); //a
 
@@ -55,7 +55,7 @@ public interface UserAndAdminService {
 		List<Product> viewAllProductsPurchasedByAnUser(int userId); //d
 
 //	    8.viewTransactionsOfAnUser(int userId) - same as user
-		long AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq); //s
+		String AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq); //s
 
 		List<Product> viewProductsByFilter(String productType); //a
 

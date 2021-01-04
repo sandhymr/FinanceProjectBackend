@@ -44,7 +44,7 @@ public interface UserAndAdminRepository {
 
 	List<User> viewUsersByPaid(int userId, double registrationFee);
 
-	List<User> viewUsersByNotPaid(int userId, double registrationFee);
+	List<User> viewUsersByNotPaid();
 
 	Card verifyAndGenerateCardForAnUser(int userId, Card card);
 
