@@ -31,7 +31,7 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
-	public User payJoiningFee(int userId) {
+	public User payJoiningFee(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -50,25 +50,25 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
-	public ProductPurchased buyProduct(int userId, int productId, String emiScheme) {
+	public ProductPurchased buyProduct(long userId, long productId, int emiScheme) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Transaction payEmi(int productPurchasedId, int userId, int cardId) {
+	public Transaction payEmi(long productPurchasedId, long userId, long cardId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Transaction> viewTransactionsOfAnUser(int userId) {
+	public List<Transaction> viewTransactionsOfAnUser(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Transaction> viewTransactionsOfAnUserByDate(int userId, LocalDate date) {
+	public List<Transaction> viewTransactionsOfAnUserByDate(long userId, LocalDate date) {
 		String jpql="from Transaction t where t.userId=:userId and t.transactionDate=:date";
 		TypedQuery<Transaction> query = em.createQuery(jpql, Transaction.class);
 		query.setParameter("userId", userId);
@@ -77,13 +77,13 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
-	public User changePassword(int userId) {
+	public User changePassword(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(int productId) {
+	public List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(long productId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -108,7 +108,7 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
-	public List<User> viewUsersByPaid(int userId, double registrationFee) {
+	public List<User> viewUsersByPaid(long userId, double registrationFee) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -121,7 +121,7 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
-	public Card verifyAndGenerateCardForAnUser(int userId, Card card) {
+	public Card verifyAndGenerateCardForAnUser(long userId, Card card) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -133,22 +133,28 @@ public class UserAndAdminRepositoryImpl implements UserAndAdminRepository {
 	}
 
 	@Override
-	public List<Product> viewAllProductsPurchasedByAnUser(int userId) {
+	public List<Product> viewAllProductsPurchasedByAnUser(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public long AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq) {
-		faq.getProduct().setProductId(productId);
-		FrequentlyAskedQuestion newFaq = em.merge(faq);
-		return newFaq.getFaqId();
+	public long AddFrequentlyAskedQuestions(FrequentlyAskedQuestion faq) {
+		return em.merge(faq).getFaqId();
 	}
 
 	@Override
 	public List<Product> viewProductsByFilter(String productType) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+
+	//Extra
+	
+	@Override
+	public Product findProductById(long productId) {
+		return em.find(Product.class, productId);
 	}
 
 }

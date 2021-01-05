@@ -30,12 +30,16 @@ public class UserAndAdminController {
 		return userAndAdminService.viewUsersByNotPaid();
 	}
 	
-	public String AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq) {
-		return userAndAdminService.AddFrequentlyAskedQuestions(productId, faq);	    
+	public String AddFrequentlyAskedQuestions(FrequentlyAskedQuestion faq) {
+		return userAndAdminService.AddFrequentlyAskedQuestions(faq);	    
 	}
 
-	public List<Transaction> viewTransactionsOfAnUserByDate(int userId, String date) {
+	public List<Transaction> viewTransactionsOfAnUserByDate(long userId, String date) {
 		return userAndAdminService.viewTransactionsOfAnUserByDate(userId, date);
 	}
 	
+	public Product findProductById(long productId) {
+		return userAndAdminService.findProductById(productId);
+		
+	}
 }

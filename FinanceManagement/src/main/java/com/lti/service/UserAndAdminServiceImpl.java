@@ -29,7 +29,7 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public User payJoiningFee(int userId) {
+	public User payJoiningFee(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -51,25 +51,25 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public ProductPurchased buyProduct(int userId, int productId, String emiScheme) {
+	public ProductPurchased buyProduct(long userId, long productId, int emiScheme) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Transaction payEmi(int productPurchasedId, int userId, int cardId) {
+	public Transaction payEmi(long productPurchasedId, long userId, long cardId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Transaction> viewTransactionsOfAnUser(int userId) {
+	public List<Transaction> viewTransactionsOfAnUser(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Transaction> viewTransactionsOfAnUserByDate(int userId, String date) {
+	public List<Transaction> viewTransactionsOfAnUserByDate(long userId, String date) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-yyyy");
         LocalDate localDate = LocalDate.parse(date, formatter);
 	    List<Transaction> transactions = userAndAdminRepository.viewTransactionsOfAnUserByDate(userId, localDate);
@@ -87,13 +87,13 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public User changePassword(int userId) {
+	public User changePassword(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(int productId) {
+	public List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(long productId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -102,7 +102,7 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	public String adminRegister(Admin admin) {
 		String result = userAndAdminRepository.adminRegister(admin);
 		if(result!=null) {
-			return "Registered successfully";
+			return "Registered successfully...Admin userName : "+result;
 		}else {
 			return "Registration failed.";
 		}
@@ -121,7 +121,7 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public List<User> viewUsersByPaid(int userId, double registrationFee) {
+	public List<User> viewUsersByPaid(long userId, double registrationFee) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -137,7 +137,7 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public Card verifyAndGenerateCardForAnUser(int userId, Card card) {
+	public Card verifyAndGenerateCardForAnUser(long userId, Card card) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -149,18 +149,18 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	}
 
 	@Override
-	public List<Product> viewAllProductsPurchasedByAnUser(int userId) {
+	public List<Product> viewAllProductsPurchasedByAnUser(long userId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq) {
-		long result = userAndAdminRepository.AddFrequentlyAskedQuestions(productId, faq);
+	public String AddFrequentlyAskedQuestions(FrequentlyAskedQuestion faq) {
+		long result = userAndAdminRepository.AddFrequentlyAskedQuestions(faq);
 		if(result < 0) {
 			return "Failed to add the details";
 		}else {
-			return "Added successfully";
+			return "Added successfully ... id: "+result;
 		}
 	    
 	}
@@ -169,6 +169,16 @@ public class UserAndAdminServiceImpl implements UserAndAdminService {
 	public List<Product> viewProductsByFilter(String productType) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Product findProductById(long productId) {
+		Product product = userAndAdminRepository.findProductById(productId);
+		if(product != null) {
+			return product;
+		}else {
+			return null;
+		}
 	}
 
 }

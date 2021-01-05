@@ -16,24 +16,24 @@ public interface UserAndAdminRepository {
 	// user
 	long register(User user);
 
-	User payJoiningFee(int userId);
+	User payJoiningFee(long userId);
 
 	boolean login(String userName, String password);
 
 	List<Product> viewAllProducts();
 
-	ProductPurchased buyProduct(int userId, int productId, String emiScheme);
+	ProductPurchased buyProduct(long userId, long productId, int emiScheme);
 
-	Transaction payEmi(int productPurchasedId, int userId, int cardId);
+	Transaction payEmi(long productPurchasedId, long userId, long cardId);
 
-	List<Transaction> viewTransactionsOfAnUser(int userId);
+	List<Transaction> viewTransactionsOfAnUser(long userId);
 
-	List<Transaction> viewTransactionsOfAnUserByDate(int userId, LocalDate date);
+	List<Transaction> viewTransactionsOfAnUserByDate(long userId, LocalDate date);
 
 //    forgotPassword(String email)
-	User changePassword(int userId);
+	User changePassword(long userId);
 
-	List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(int productId);
+	List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(long productId);
 
 	// admin
 	String adminRegister(Admin admin);
@@ -42,20 +42,23 @@ public interface UserAndAdminRepository {
 
 	List<User> viewAllUsers();
 
-	List<User> viewUsersByPaid(int userId, double registrationFee);
+	List<User> viewUsersByPaid(long userId, double registrationFee);
 
 	List<User> viewUsersByNotPaid();
 
-	Card verifyAndGenerateCardForAnUser(int userId, Card card);
+	Card verifyAndGenerateCardForAnUser(long userId, Card card);
 
 	long addAProduct(Product product);
 
 //    6.viewAllProducts() - same as user
-	List<Product> viewAllProductsPurchasedByAnUser(int userId);
+	List<Product> viewAllProductsPurchasedByAnUser(long userId);
 
 //    8.viewTransactionsOfAnUser(int userId) - same as user
-	long AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq);
+	long AddFrequentlyAskedQuestions(FrequentlyAskedQuestion faq);
 
 	List<Product> viewProductsByFilter(String productType);
 
+	
+	//Extra
+	Product findProductById(long productId);
 }

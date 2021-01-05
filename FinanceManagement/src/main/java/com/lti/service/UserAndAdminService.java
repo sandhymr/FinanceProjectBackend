@@ -16,25 +16,25 @@ public interface UserAndAdminService {
 	// user
 		long register(User user);   //a
 
-		User payJoiningFee(int userId); //b
+		User payJoiningFee(long userId); //b
 
 		boolean login(String userName, String password); //d
 
 		List<Product> viewAllProducts(); //s
 
-		ProductPurchased buyProduct(int userId, int productId, String emiScheme); //a
+		ProductPurchased buyProduct(long userId, long productId, int emiScheme); //a
 
-		Transaction payEmi(int productPurchasedId, int userId, int cardId); //b
+		Transaction payEmi(long productPurchasedId, long userId, long cardId); //b
 
-		List<Transaction> viewTransactionsOfAnUser(int userId); //d
+		List<Transaction> viewTransactionsOfAnUser(long userId); //d
 
-		List<Transaction> viewTransactionsOfAnUserByDate(int userId, String date); //s
+		List<Transaction> viewTransactionsOfAnUserByDate(long userId, String date); //s
 
 	    String forgotPassword(String email); //a
 	    
-		User changePassword(int userId); //b
+		User changePassword(long userId); //b
 
-		List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(int productId); //d
+		List<FrequentlyAskedQuestion> viewFrequentlyAskedQuestions(long productId); //d
 
 		// admin
 		String adminRegister(Admin admin); //s
@@ -43,20 +43,23 @@ public interface UserAndAdminService {
 
 		List<User> viewAllUsers(); //b
 
-		List<User> viewUsersByPaid(int userId, double registrationFee); //d
+		List<User> viewUsersByPaid(long userId, double registrationFee); //d
 
 		List<User> viewUsersByNotPaid(); //s
 
-		Card verifyAndGenerateCardForAnUser(int userId, Card card); //a
+		Card verifyAndGenerateCardForAnUser(long userId, Card card); //a
 
 		long addAProduct(Product product); //b
 
 //	    6.viewAllProducts() - same as user
-		List<Product> viewAllProductsPurchasedByAnUser(int userId); //d
+		List<Product> viewAllProductsPurchasedByAnUser(long userId); //d
 
 //	    8.viewTransactionsOfAnUser(int userId) - same as user
-		String AddFrequentlyAskedQuestions(int productId, FrequentlyAskedQuestion faq); //s
+		String AddFrequentlyAskedQuestions(FrequentlyAskedQuestion faq); //s
 
 		List<Product> viewProductsByFilter(String productType); //a
+		
+		//extra
+		Product findProductById(long productId);
 
 }
